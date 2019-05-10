@@ -16,9 +16,12 @@
           <img :src="banner.picUrl" alt="banner" />
         </div>
       </div>
-      <div slot="button-prev" class="swiper-button-prev"></div>
-      <div slot="button-next" class="swiper-button-next"></div>
+      <!-- <div slot="button-prev" class="swiper-button-prev"></div>
+      <div slot="button-next" class="swiper-button-next"></div> -->
       <div slot="pagination" class="swiper-pagination"></div>
+    </div>
+    <div class="download">
+      <a href="" class="download__link"></a>
     </div>
   </div>
 </template>
@@ -39,11 +42,11 @@ export default {
         loop: true,
         pagination: {
           el: '.swiper-pagination'
-        },
-        navigation: {
-          nextEl: '.swiper-button-next',
-          prevEl: '.swiper-button-prev'
         }
+        // navigation: {
+        //   nextEl: '.swiper-button-next',
+        //   prevEl: '.swiper-button-prev'
+        // }
       }
     }
   },
@@ -67,6 +70,7 @@ export default {
   }
 }
 </script>
+
 <style lang="less" scoped>
 .swiperbox {
   background-repeat: repeat-x;
@@ -74,11 +78,32 @@ export default {
     margin: 0 auto;
     width: 982px;
     height: 336px;
+    position: relative;
     .swiper-slide {
       img {
-        width: 100%;
+        width: calc(~'100% - 254px');
         height: 100%;
+        margin-right: 254px;
       }
+    }
+  }
+  .download {
+    position: absolute;
+    top: 105px;
+    z-index: 20;
+    right: 459px;
+    z-index: 20;
+    width: 254px;
+    height: 336px;
+    background: url('~assets/img/spirte/download.png') no-repeat 0 0;
+    .download__link {
+      display: block;
+      width: 215px;
+      height: 56px;
+      margin: 212px 0 0 19px;
+      background: url('~assets/img/spirte/download.png') no-repeat 0 0;
+      background-position: 0 9999px;
+      text-indent: -9999px;
     }
   }
 }

@@ -165,3 +165,10 @@ export const artistList = (params = {}) => {
     params: params
   })
 }
+export const djProgram = (params = {}) => {
+  return axios.request({
+    url: apiMusic.djProgram,
+    method: 'get',
+    params: params
+  })
+}

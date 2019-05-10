@@ -16,7 +16,7 @@ const apiMusic = {
   // privatecontent: '/personalized/privatecontent', // 独家放送
   // personalizedMv: '/personalized/mv', // 推荐MV
   // newSong: '/personalized/newsong', // 推荐音乐
-  // djProgram: '/personalized/djprogram', // 推荐电台
+  djProgram: '/personalized/djprogram', // 推荐电台
   // mv: '/mv', // 获取mv数据
   // simiMv: '/simi/mv', // 获取相似mv
   // mvComment: '/comment/mv', // 获取mv评论

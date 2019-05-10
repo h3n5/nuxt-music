@@ -51,7 +51,7 @@ export default {
   height: 33px;
   padding: 0 10px 0 34px;
   border-bottom: 2px solid #c10d0c;
-  background: url('../../assets/img/spirte/index.png') -225px -156px no-repeat;
+  background: url('~assets/img/spirte/index.png') -225px -156px no-repeat;
   .tag__title {
     float: left;
     font-size: 20px;
@@ -82,7 +82,7 @@ export default {
       display: inline-block;
       height: 12px;
       width: 12px;
-      background: url('../../assets/img/spirte/index.png') 0 -240px no-repeat;
+      background: url('~assets/img/spirte/index.png') 0 -240px no-repeat;
     }
   }
 }

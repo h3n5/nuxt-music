@@ -112,8 +112,7 @@ export default {
           width: 50px;
           height: 45px;
           margin: 0 auto;
-          background: url('../../assets/img/spirte/foot_enter_new.png')
-            no-repeat;
+          background: url('~assets/img/spirte/foot_enter_new.png') no-repeat;
           background-size: 110px 450px;
         }
         .enter__word {
@@ -121,7 +120,7 @@ export default {
           margin: 5px 5px 0;
           width: 52px;
           height: 14px;
-          background: url('../../assets/img/spirte/foot_enter_tt.png') no-repeat;
+          background: url('~assets/img/spirte/foot_enter_tt.png') no-repeat;
           background-size: 180px 100px;
         }
         &:nth-child(1) {

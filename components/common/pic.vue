@@ -8,6 +8,7 @@
 </template>
 
 <script>
+// :src="require('~/assets/img/player-bar.png')"
 export default {
   name: 'Pic',
   props: {
