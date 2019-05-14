@@ -1,0 +1,11 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"prettier.printWidth": 120,
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	}
+}

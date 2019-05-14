@@ -1,0 +1,7 @@
+{
+    "prettier.printWidth": 200,
+    "vetur.format.defaultFormatterOptions": {
+       "wrapAttributes": false
+    },
+    "html.format.wrapAttributes": "aligned-multiple"
+}
