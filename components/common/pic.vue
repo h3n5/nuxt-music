@@ -1,14 +1,17 @@
 <template>
   <div @click="click">
     <div class="imgbox">
-      <img v-lazy="item.picUrl" :alt="item.name" />
+      <img
+        v-lazy="item.picUrl"
+        :src="require('~/assets/img/player-bar.png')"
+        :alt="item.name"
+      />
     </div>
     <p class="songinfo">{{ item.name }}</p>
   </div>
 </template>
 
 <script>
-// :src="require('~/assets/img/player-bar.png')"
 export default {
   name: 'Pic',
   props: {
