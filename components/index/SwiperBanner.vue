@@ -9,11 +9,11 @@
       <div class="swiper-wrapper">
         <div
           v-for="banner in banners"
-          :key="banner.picUrl"
+          :key="banner.imageUrl"
           class="swiper-slide"
           @click="jump(banner)"
         >
-          <img :src="banner.picUrl" alt="banner" />
+          <img :src="banner.imageUrl" alt="banner" />
         </div>
       </div>
       <!-- <div slot="button-prev" class="swiper-button-prev"></div>
@@ -53,7 +53,7 @@ export default {
   computed: {
     bgStyle() {
       return {
-        backgroundImage: `url(${this.banners[this.index].backgroundUrl})`
+        // backgroundImage: `url(${this.banners[this.index].imageUrl})`
       }
     }
   },

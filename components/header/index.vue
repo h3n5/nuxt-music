@@ -2,9 +2,7 @@
   <div class="wrap">
     <header class="top">
       <div class="nav">
-        <h1 class="nav__log">
-          网易云音乐
-        </h1>
+        <h1 class="nav__log">网易云音乐</h1>
         <ul class="nav__list">
           <li
             v-for="(item, index) in navlist"
@@ -13,7 +11,11 @@
             :class="{ selected: item.seleted }"
             @click="choose(item, navlist)"
           >
-            {{ item.name }}
+            <a
+              :href="item.url ? item.url : '#'"
+              :target="item.blank ? '_blank' : ''"
+              >{{ item.name }}</a
+            >
           </li>
         </ul>
         <div class="nav__search">
@@ -49,9 +51,24 @@ export default {
         { name: '发现音乐', seleted: true },
         { name: '我的音乐', seleted: false },
         { name: '朋友', seleted: false },
-        { name: '商城', seleted: false },
-        { name: '音乐人', seleted: false },
-        { name: '下载客户端', seleted: false }
+        {
+          name: '商城',
+          seleted: false,
+          url: 'https://music.163.com/store/product',
+          blank: true
+        },
+        {
+          name: '音乐人',
+          seleted: false,
+          url: 'https://music.163.com/nmusician/web/index',
+          blank: true
+        },
+        {
+          name: '下载客户端',
+          seleted: false,
+          url: 'https://music.163.com/#/download',
+          blank: true
+        }
       ],
       navSideList: [
         { name: '推荐', seleted: true },
@@ -63,8 +80,9 @@ export default {
       ]
     }
   },
-
-  methods: {}
+  methods: {
+    choose(v, list) {}
+  }
 }
 </script>
 <style lang="less" scoped>
@@ -97,10 +115,12 @@ export default {
       cursor: default;
       text-align: center;
       flex: 1;
-      color: #ccc;
       height: 70px;
       line-height: 70px;
       list-style-type: none;
+      a {
+        color: #ccc;
+      }
     }
     .selected {
       position: relative;

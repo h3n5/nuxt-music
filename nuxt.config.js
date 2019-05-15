@@ -9,7 +9,7 @@ module.exports = {
    ** Headers of the page
    */
   head: {
-    title: pkg.name,
+    title: '网易云音乐',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -40,7 +40,8 @@ module.exports = {
    */
   plugins: [
     { src: '~/plugins/swiper.js', ssr: false },
-    { src: '~/plugins/vue-lazyload.js', ssr: false }
+    { src: '~/plugins/vue-lazyload.js', ssr: false },
+    { src: '~/plugins/audio/install.js', ssr: false }
   ],
 
   /*

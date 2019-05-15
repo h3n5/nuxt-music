@@ -20,6 +20,11 @@ export default {
       banners: []
     }
   },
+  head() {
+    return {
+      title: '网易云音乐'
+    }
+  },
   async asyncData() {
     const [banners, comments, artist, djlist] = await Promise.all([
       getBanner(),
