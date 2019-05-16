@@ -20,6 +20,7 @@ class Auplayer {
   init() {
     this.audio = document.createElement('audio')
     this.audio.preload = this.options.preload
+    this.audio.loop = true
     this.on('timeupdate', e => {
       if (this.currentTimeFlag) {
         this.setcurrentTime(e.target.currentTime)

@@ -27,6 +27,9 @@
             <button></button>
             <button></button>
           </div>
+          <no-ssr>
+            <anime />
+          </no-ssr>
           <div class="lyric">
             <div class="lrc-content content">
               <div class="lrc-box">
@@ -52,10 +55,14 @@
 <script>
 import { getsongDetail, getSongUrl } from '@/api/api'
 import { mapState } from 'vuex'
+import anime from '@/components/common/anime.vue'
 export default {
   name: 'Song',
   validate({ params }) {
     return /^\d+$/.test(params.id)
+  },
+  components: {
+    anime
   },
   data() {
     return {
@@ -88,6 +95,11 @@ export default {
   },
   fetch({ store, params }) {
     store.dispatch('getLrc', params.id)
+  },
+  mounted() {
+    setTimeout(() => {
+      this.play()
+    }, 2000)
   },
   methods: {
     play() {

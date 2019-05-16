@@ -1,5 +1,6 @@
 <template>
   <div class="footer">
+    <audio src=""></audio>
     <div class="content">
       <div class="copy fl clear">
         <p class="link">
@@ -48,7 +49,9 @@ export default {
       ]
     }
   },
-
+  created() {
+    console.log('test')
+  },
   methods: {}
 }
 </script>
