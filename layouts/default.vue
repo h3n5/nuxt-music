@@ -2,6 +2,7 @@
   <div>
     <mheader />
     <nuxt />
+    <iframe src="/music" frameborder="0" style="height: 0;"></iframe>
     <mfooter />
   </div>
 </template>

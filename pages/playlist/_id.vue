@@ -7,14 +7,18 @@
             v-lazy="playlist.coverImgUrl"
             :src="require('@/assets/img/player-bar.png')"
             :alt="playlist.name"
+            class="all100"
           />
         </div>
         <div class="list__content">
           <div class="title"></div>
         </div>
       </div>
+      <!-- 列表 -->
     </div>
-    <div class="right"></div>
+    <div class="right">
+      <Button type="primary">Primary</Button>
+    </div>
   </div>
 </template>
 
@@ -26,9 +30,8 @@ export default {
     return {}
   },
   async asyncData({ params }) {
-    console.log(params.id)
     const { playlist } = await playlistDetail({ id: params.id })
-    return playlist
+    return { playlist }
   },
 
   methods: {}
@@ -47,9 +50,15 @@ export default {
   .left {
     flex: 1;
     padding: 47px 30px 40px 39px;
-  }
-  .right {
-    width: 271px;
+    .list__info {
+      display: flex;
+      flex-flow: row nowrap;
+      .cover {
+        height: 196px;
+        width: 196px;
+        margin-right: 10px;
+      }
+    }
   }
 }
 </style>

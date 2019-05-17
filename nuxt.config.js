@@ -41,7 +41,8 @@ module.exports = {
   plugins: [
     { src: '~/plugins/swiper.js', ssr: false },
     { src: '~/plugins/vue-lazyload.js', ssr: false },
-    { src: '~/plugins/audio/install.js', ssr: false }
+    { src: '~/plugins/audio/install.js', ssr: false },
+    { src: '~/plugins/iview.js', ssr: true }
   ],
 
   /*
@@ -63,6 +64,17 @@ module.exports = {
   /*
    ** Build configuration
    */
+  babel: {
+    plugins: [
+      [
+        'import',
+        {
+          libraryName: 'iview',
+          libraryDirectory: 'src/components'
+        }
+      ]
+    ]
+  },
   build: {
     /*
      ** You can extend webpack config here

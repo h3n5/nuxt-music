@@ -3,6 +3,10 @@ import Lyric from '@//plugins/lyric'
 export const state = () => ({
   star: {},
   visit: [],
+  song: {
+    playing: false,
+    name: 'test'
+  },
   lyricTxt: '',
   lyricTxtCN: '',
   lyricObj: {}

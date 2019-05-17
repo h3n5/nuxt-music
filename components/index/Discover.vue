@@ -4,14 +4,16 @@
       <div class="left fl">
         <tag title="热门推荐" :tabs="tabs" :more="more" />
         <ul class="comments">
-          <li
+          <nuxt-link
             v-for="(item, index) in comments"
             :key="index"
+            tag="li"
             :class="{ mr0: (index + 1) % 4 === 0 && index !== 0 }"
+            :to="`playlist/${item.id}`"
             class="comments__list fl"
           >
             <pic :item="item" />
-          </li>
+          </nuxt-link>
         </ul>
         <tag title="新碟上架" :more="more" />
         <div class="disk"></div>
