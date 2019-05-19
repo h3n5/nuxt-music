@@ -2,7 +2,7 @@
   <div class="wrap">
     <header class="top">
       <div class="nav">
-        <h1 class="nav__log">网易云音乐</h1>
+        <nuxt-link tag="h1" to="/" class="nav__log">网易云音乐</nuxt-link>
         <ul class="nav__list">
           <li
             v-for="(item, index) in navlist"

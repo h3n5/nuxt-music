@@ -1,11 +1,13 @@
-import { getLyric } from '@/api/api'
+import { getLyric, getSongUrl } from '@/api/api'
 import Lyric from '@//plugins/lyric'
 export const state = () => ({
   star: {},
   visit: [],
   song: {
     playing: false,
-    name: 'test'
+    name: 'song',
+    id: '2802079580',
+    url: ''
   },
   lyricTxt: '',
   lyricTxtCN: '',
@@ -27,10 +29,18 @@ export const mutations = {
   },
   setLrcObj(state, value) {
     state.lyricObj = value
+  },
+  setUrl(state, value) {
+    state.song.url = value
   }
 }
 
 export const actions = {
+  async getSong({ commit }, id) {
+    const res = await getSongUrl(id)
+    const url = res.data[0].url
+    commit('setUrl', url)
+  },
   async getLrc({ state, commit }, id) {
     commit('setLrc', '加载中。。')
     const res = await getLyric(id)

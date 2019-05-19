@@ -16,9 +16,7 @@ export default {
     Discover
   },
   data() {
-    return {
-      banners: []
-    }
+    return {}
   },
   head() {
     return {
@@ -33,10 +31,10 @@ export default {
       djProgram()
     ])
     return {
-      banners: banners.data.banners,
-      comments: comments.data.result.slice(0, 8),
-      artist: artist.data.artists,
-      djlist: djlist.data.result
+      banners: banners.banners,
+      comments: comments.result.slice(0, 8),
+      artist: artist.artists,
+      djlist: djlist.result
     }
   },
   methods: {

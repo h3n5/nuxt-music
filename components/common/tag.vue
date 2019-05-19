@@ -57,6 +57,7 @@ export default {
     font-size: 20px;
     font-weight: normal;
     line-height: 28px;
+    color: #333;
   }
   .tabs {
     float: left;
@@ -78,6 +79,7 @@ export default {
     float: right;
     margin-top: 9px;
     padding-right: 5px;
+    color: #333;
     .arrow {
       display: inline-block;
       height: 12px;
