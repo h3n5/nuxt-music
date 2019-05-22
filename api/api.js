@@ -172,3 +172,17 @@ export const djProgram = (params = {}) => {
     params: params
   })
 }
+export const commentMusic = (params = {}) => {
+  return axios.request({
+    url: apiMusic.commentMusic,
+    method: 'get',
+    params: params
+  })
+}
+export const simiPlaylist = id => {
+  return axios.request({
+    url: apiMusic.simiPlaylist,
+    method: 'get',
+    params: { id }
+  })
+}

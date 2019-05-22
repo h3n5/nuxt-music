@@ -38,23 +38,33 @@ export const mutations = {
 export const actions = {
   async getSong({ commit }, id) {
     const res = await getSongUrl(id)
-    const url = res.data[0].url
+    const url = res[0].url
     commit('setUrl', url)
   },
   async getLrc({ state, commit }, id) {
     commit('setLrc', '加载中。。')
     const res = await getLyric(id)
-    if (res.data.nolyric) {
+    if (res.nolyric) {
       commit('setLrc', '(⊙０⊙) 暂无歌词')
     } else {
-      commit('setLrc', res.data.lrc.lyric)
+      commit('setLrc', res.lrc.lyric)
     }
-    if (!res.data.nolyric || (res.data.tlyric && res.data.tlyric.lyric)) {
-      commit('setLrcCN', res.data.tlyric.lyric)
+    if (!res.nolyric || (res.tlyric && res.tlyric.lyric)) {
+      commit('setLrcCN', res.tlyric.lyric)
     } else {
       commit('setLrcCN', '')
     }
-    const lycObj = new Lyric(state.lyricTxt, state.lyricTxtCN)
+    /* eslint-disable-next-line */
+    let user = {}
+    if (res.lyricUser) {
+      user.lyricUser = res.lyricUser.nickname
+    }
+    if (res.transUser) {
+      user.transUser = res.transUser.nickname
+    }
+    /* eslint-disable-next-line */
+    let lycObj = new Lyric(state.lyricTxt, state.lyricTxtCN)
+    Object.assign(lycObj, user)
     commit('setLrcObj', lycObj)
   }
 }

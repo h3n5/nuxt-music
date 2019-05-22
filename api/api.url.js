@@ -23,6 +23,8 @@ const apiMusic = {
   // playlistComment: '/comment/playlist', // 获取歌单评论
   // albumComment: '/comment/album', // 获取专辑评论
   // artistMv: '/artist/mv', // 获取歌手MV
+  simiPlaylist: '/simi/playlist', // 相似歌单
+  commentMusic: '/comment/music', // 歌曲评论
   toplist: '/toplist/detail',
   playlistDetail: '/playlist/detail', // 获取歌单详情
   topPlaylist: '/top/playlist', //  歌单(网友精选歌单)

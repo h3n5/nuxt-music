@@ -17,6 +17,7 @@ module.exports = {
   plugins: ['prettier'],
   // add your custom rules here
   rules: {
+    'vue/no-v-html': 'off',
     'nuxt/no-cjs-in-config': 'off',
     'nuxt/no-timing-in-fetch-data': 'off',
     'no-console': 0,

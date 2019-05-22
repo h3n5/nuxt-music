@@ -47,9 +47,13 @@
           <span class="h3">歌曲列表</span>
           <span class="nums">共 {{ playlist.tracks.length }} 首歌</span>
         </div>
-        <Table :columns="columns" :data="playlist.tracks">
+        <Table
+          :columns="columns"
+          :data="playlist.tracks"
+          @on-row-click="singleclick"
+        >
           <template slot="index" slot-scope="{ row, index }">
-            <span class="index">{{ index }}</span>
+            <span class="index">{{ index + 1 }}</span>
             <Icon type="ios-play" size="18" @click.native="play(row)" />
           </template>
           <template slot="time" slot-scope="{ row }">
@@ -124,6 +128,9 @@ export default {
   },
   methods: {
     ...mapActions(['getSong']),
+    singleclick(row) {
+      this.$router.push({ name: 'song-id', params: { id: row.id } })
+    },
     format(s) {
       const temp = ~~(s / 1000)
       return (
