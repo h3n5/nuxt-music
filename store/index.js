@@ -5,7 +5,7 @@ export const state = () => ({
   visit: [],
   song: {
     playing: false,
-    name: 'song',
+    name: 'songtest',
     id: '2802079580',
     url: ''
   },
