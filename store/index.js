@@ -1,5 +1,5 @@
 import { getLyric, getSongUrl } from '@/api/api'
-import Lyric from '@//plugins/lyric'
+import Lyric from '@/plugins/lyric'
 export const state = () => ({
   star: {},
   visit: [],
