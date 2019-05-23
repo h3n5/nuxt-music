@@ -186,3 +186,17 @@ export const simiPlaylist = id => {
     params: { id }
   })
 }
+export const searchIndex = data => {
+  const search = [1, 10, 1000].map((v, i) =>
+    axios.request({
+      url: apiMusic.search,
+      method: 'get',
+      params: {
+        keywords: data,
+        type: v,
+        limit: 4 - i
+      }
+    })
+  )
+  return Promise.all(search)
+}

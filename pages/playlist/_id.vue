@@ -37,7 +37,7 @@
             }}</Tag>
           </div>
           <div class="desc">
-            <p>desc</p>
+            <p>{{ desc }}</p>
           </div>
         </div>
       </div>

@@ -19,7 +19,27 @@
           </li>
         </ul>
         <div class="nav__search">
-          <input type="text" class="nav__search__input" placeholder="音乐" />
+          <AutoComplete v-model="search" icon="ios-search" @on-select="select">
+            <div
+              v-for="(item, i) in searchResult"
+              :key="i"
+              class="demo-auto-complete-item"
+            >
+              <div class="demo-auto-complete-group">
+                <span>{{ item.name }}</span>
+              </div>
+              <Option
+                v-for="option in item.list"
+                :key="option.id"
+                :value="option.name"
+              >
+                <span class="auto-complete-title">{{ option.name }}</span>
+              </Option>
+            </div>
+          </AutoComplete>
+        </div>
+        <div class="create-center">
+          <Button shape="circle" ghost>创造者中心</Button>
         </div>
         <div class="user-info">
           <span class="login">登录</span>
@@ -43,10 +63,24 @@
 </template>
 
 <script>
+import { searchIndex } from '@/api/api'
+const debounce = function(func, wait = 1000) {
+  let timeout
+  return function() {
+    const that = this
+    const argus = arguments
+    timeout && clearTimeout(timeout)
+    timeout = setTimeout(function() {
+      func.apply(that, argus)
+    }, wait)
+  }
+}
 export default {
   name: 'Mheader',
   data() {
     return {
+      search: '',
+      searchResult: {},
       navlist: [
         { name: '发现音乐', seleted: true },
         { name: '我的音乐', seleted: false },
@@ -80,8 +114,44 @@ export default {
       ]
     }
   },
+  watch: {
+    search: {
+      handler: debounce(function(v) {
+        if (v) {
+          searchIndex(v).then(([songs, albums, playlists]) => {
+            const object = {
+              songs: {
+                name: '单曲',
+                list: songs.result.songs || []
+              },
+              albums: {
+                name: '专辑',
+                list: albums.result.albums || []
+              },
+              playlists: {
+                name: '歌单',
+                list: playlists.result.playlists || []
+              }
+            }
+            for (const key in object) {
+              if (object.hasOwnProperty(key)) {
+                if (object[key].list.length === 0) {
+                  delete object[key]
+                }
+              }
+            }
+
+            this.searchResult = object
+          })
+        }
+      })
+    }
+  },
   methods: {
-    choose(v, list) {}
+    choose(v, list) {},
+    select(v) {
+      console.log(v)
+    }
   }
 }
 </script>
@@ -102,6 +172,7 @@ export default {
   margin: 0 auto;
   display: flex;
   flex-flow: row nowrap;
+  align-items: center;
   .nav__log {
     width: 176px;
     background: url('~assets/img/spirte/topbar.png') 0 0 no-repeat;
@@ -137,6 +208,7 @@ export default {
   }
   .nav__search {
     line-height: 70px;
+    margin-left: 30px;
     input {
       width: 100%;
       border: none;
@@ -148,6 +220,13 @@ export default {
   .user-info {
     line-height: 70px;
     width: 158px;
+    color: #ccc;
+  }
+  .create-center {
+    margin: 0 15px;
+    > button {
+      color: #ccc;
+    }
   }
 }
 .nav-side-wrap {
@@ -185,5 +264,35 @@ export default {
       }
     }
   }
+}
+.demo-auto-complete-item {
+  padding: 4px 0;
+  border-bottom: 1px solid #f6f6f6;
+}
+.demo-auto-complete-group {
+  font-size: 12px;
+  padding: 4px 6px;
+}
+.demo-auto-complete-group span {
+  color: #666;
+  font-weight: bold;
+}
+.demo-auto-complete-group a {
+  float: right;
+}
+.auto-complete-title {
+  font-size: 12px;
+  padding-left: 10px;
+}
+.demo-auto-complete-count {
+  float: right;
+  color: #999;
+}
+.demo-auto-complete-more {
+  display: block;
+  margin: 0 auto;
+  padding: 4px;
+  text-align: center;
+  font-size: 12px;
 }
 </style>

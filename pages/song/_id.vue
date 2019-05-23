@@ -32,6 +32,9 @@
             <Button>下载</Button>
             <Button>评论</Button>
           </div>
+          <div class="anime">
+            anime
+          </div>
           <div class="lyric">
             <div class="lrc-content content">
               <div ref="lrc" class="lrc-box" :class="{ isFlat: isFlat }">
@@ -52,24 +55,24 @@
                 </span>
               </div>
             </div>
-            <div id="user-operation" class="lrc-user">
-              <p class="link">
-                <span>翻译歌词</span>
-                <span>报错</span>
-              </p>
-              <p class="user">
-                <span
-                  >贡献歌词：<span class="color--blue">{{
-                    lyricObj.lyricUser
-                  }}</span></span
-                >
-                <span
-                  >贡献翻译：<span class="color--blue">{{
-                    lyricObj.transUser
-                  }}</span></span
-                >
-              </p>
-            </div>
+          </div>
+          <div id="user-operation" class="lrc-user">
+            <p class="link">
+              <span>翻译歌词</span>
+              <span>报错</span>
+            </p>
+            <p class="user">
+              <span
+                >贡献歌词：<span class="color--blue">{{
+                  lyricObj.lyricUser
+                }}</span></span
+              >
+              <span
+                >贡献翻译：<span class="color--blue">{{
+                  lyricObj.transUser
+                }}</span></span
+              >
+            </p>
           </div>
         </div>
       </div>
@@ -158,7 +161,13 @@
     <div class="right">
       <h3 class="tit">包含这首歌的歌单</h3>
       <ul class="similist">
-        <li v-for="(item, index) in simi" :key="index" class="list__item">
+        <nuxt-link
+          v-for="(item, index) in simi"
+          :key="index"
+          :to="{ name: 'playlist-id', params: { id: item.id } }"
+          tag="li"
+          class="list__item"
+        >
           <div class="simi__cover">
             <img :src="item.coverImgUrl" :alt="item.name" class="all100" />
           </div>
@@ -166,7 +175,7 @@
             <p class="simi__name">{{ item.name }}</p>
             <p class="simi__creater">{{ item.creator.nickname }}</p>
           </div>
-        </li>
+        </nuxt-link>
       </ul>
     </div>
   </div>
@@ -366,18 +375,18 @@ export default {
               }
             }
           }
-          .lrc-user {
-            margin-top: 48px;
-            > p {
-              line-height: 30px;
-              text-align: right;
-            }
-            .link {
-              color: #999;
-            }
-            .user {
-              color: #666;
-            }
+        }
+        .lrc-user {
+          margin-top: 48px;
+          > p {
+            line-height: 30px;
+            text-align: right;
+          }
+          .link {
+            color: #999;
+          }
+          .user {
+            color: #666;
           }
         }
       }
