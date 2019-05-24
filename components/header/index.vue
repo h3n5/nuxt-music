@@ -19,7 +19,12 @@
           </li>
         </ul>
         <div class="nav__search">
-          <AutoComplete v-model="search" icon="ios-search" @on-select="select">
+          <AutoComplete
+            v-model="search"
+            icon="ios-search"
+            @on-select="select"
+            @click.native.capture="goSearch"
+          >
             <div
               v-for="(item, i) in searchResult"
               :key="i"
@@ -151,6 +156,11 @@ export default {
     choose(v, list) {},
     select(v) {
       console.log(v)
+    },
+    goSearch(e) {
+      if (this.search && e.target.tagName === 'I') {
+        this.$router.push({ name: 'search', query: { keywords: this.search } })
+      }
     }
   }
 }
@@ -226,6 +236,9 @@ export default {
     margin: 0 15px;
     > button {
       color: #ccc;
+      &:hover {
+        border-color: #fff;
+      }
     }
   }
 }
