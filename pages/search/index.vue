@@ -1,7 +1,7 @@
 <template>
   <div class="wrap">
     <div class="input">
-      <Input v-model="input" @click.native="goSearch">
+      <Input v-model="input" @click.native="goSearch()">
         <Icon slot="suffix" type="ios-search" />
       </Input>
     </div>
@@ -20,8 +20,8 @@
       </ul>
       <keep-alive>
         <component
-          :is="componentId"
-          :list="obj[selected]"
+          :is="componentId.com"
+          :list="listData"
           :count="count"
         ></component>
       </keep-alive>
@@ -35,7 +35,12 @@ export default {
   name: 'Search',
   components: {
     songs: () => import('@/components/search/songs'),
-    singers: () => import('@/components/search/singers')
+    singers: () => import('@/components/search/singers'),
+    albums: () => import('@/components/search/albums'),
+    videos: () => import('@/components/search/videos'),
+    lyrics: () => import('@/components/search/lyrics'),
+    playlists: () => import('@/components/search/playlists'),
+    userprofiles: () => import('@/components/search/userprofiles')
   },
   data() {
     return {
@@ -44,52 +49,53 @@ export default {
       count: 0,
       input: this.$route.query.keywords,
       navList: [
-        { name: '单曲', com: 'songs', type: 1 },
-        { name: '歌手', com: 'singers', type: 100 },
-        { name: '专辑', com: 'song', type: 10 },
-        { name: '视频', com: 'song', type: 1004 },
-        { name: '歌词', com: 'song', type: 1006 },
-        { name: '歌单', com: 'song', type: 1000 },
-        { name: '用户', com: 'song', type: 1002 }
+        { name: '单曲', com: 'songs', type: 1, data: 'songs' },
+        { name: '歌手', com: 'singers', type: 100, data: 'artists' },
+        { name: '专辑', com: 'albums', type: 10, data: 'albums' },
+        { name: '视频', com: 'videos', type: 1004, data: 'mvs' },
+        { name: '歌词', com: 'lyrics', type: 1006, data: 'songs' },
+        { name: '歌单', com: 'playlists', type: 1000, data: 'playlists' },
+        { name: '用户', com: 'userprofiles', type: 1002, data: 'userprofiles' }
       ],
       // 1: 单曲, 10: 专辑, 100: 歌手, 1000: 歌单, 1002: 用户, 1004: MV, 1006: 歌词, 1009: 电台, 1014: 视频
       selected: this.$route.query.type || 1
     }
   },
   computed: {
+    listData() {
+      return this.obj[this.selected] || []
+    },
     componentId() {
-      return this.navList.find(v => v.type === ~~this.selected).com
+      return this.navList.find(v => v.type === ~~this.selected)
     },
     keywords() {
       return this.$route.query.keywords
     },
     title() {
-      return `搜索“${this.keywords}”，找到 600 首单曲`
+      return `搜索“${this.keywords}”，找到 ${this.count} 个${
+        this.componentId.name
+      }`
     }
   },
-  // watch: {
-  //   selected() {
-  //     console.log(this.componentId)
-  //     console.log(this.list)
-  //     this.goSearch()
-  //   }
-  // },
   async asyncData({ query }) {
     const res = await searchMusic({
       keywords: query.keywords,
       type: query.type
     })
+    const obj = {
+      [query.type]: res.result.songs
+    }
     return {
-      list: res.result.songs,
+      obj,
       count: res.result.songCount
     }
   },
   methods: {
     async change(e) {
-      this.selected = e
       if (!this.obj[e]) {
-        await this.goSearch()
+        await this.goSearch(e)
       }
+      this.selected = e
     },
     async goSearch(e) {
       const type = e || this.selected
@@ -97,20 +103,9 @@ export default {
         keywords: this.input,
         type: type
       })
-      switch (~~type) {
-        case 1:
-          this.list = result.songs
-          this.obj[type] = result.songs
-          this.count = result.songCount
-          break
-        case 100:
-          this.list = result.artists
-          this.obj[type] = result.artists
-          this.count = result.artistCount
-          break
-        default:
-          break
-      }
+      const key = this.navList.find(v => v.type === e).data
+      this.obj[type] = result[key]
+      this.count = result[key.slice(0, -1) + 'Count']
     }
   }
 }
