@@ -159,7 +159,10 @@ export default {
     },
     goSearch(e) {
       if (this.search && e.target.tagName === 'I') {
-        this.$router.push({ name: 'search', query: { keywords: this.search } })
+        this.$router.push({
+          name: 'search',
+          query: { keywords: this.search, type: 1 }
+        })
       }
     }
   }

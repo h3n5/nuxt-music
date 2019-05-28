@@ -56,9 +56,7 @@ export const searchMusic = data => {
   return axios.request({
     url: apiMusic.search,
     method: 'get',
-    params: {
-      keywords: data
-    }
+    params: data
   })
 }
 export const getsongDetail = id => {
