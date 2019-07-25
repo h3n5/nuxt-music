@@ -5,6 +5,17 @@ class Auplayer {
   options = {}
   events = new Events()
   songList = []
+  /**
+   * {
+   * id,
+   * name,
+   * album,
+   * url,
+   * lyric
+   * lyricCn
+   * author
+   * }
+   */
   currentIndex = 0
   durationTime = ''
   currentTime = ''
@@ -55,8 +66,7 @@ class Auplayer {
       this.currentIndex === this.songList.length - 1
         ? (this.currentIndex = 0)
         : this.currentIndex++
-    }
-    if (mode === 2) {
+    } else if (mode === 2) {
       var randomIndex = () => {
         var r = ~~((this.songList.length - 1) * Math.random())
         if (r === this.currentIndex) {
@@ -65,8 +75,25 @@ class Auplayer {
         return r
       }
       this.currentIndex = randomIndex()
+    } else {
+      // do nothing
     }
-    this.setAudio(this.songList[this.currentIndex])
+    let now = this.currrent()
+    if (now) this.setAudio(now.url)
+  }
+  currrent() {
+    return this.songList[this.currentIndex]
+  }
+  setSong(obj) {
+    let res = this.songList.find(v => v.id === obj.id)
+    if (!res) {
+      this.songList.unshift(obj)
+    }
+    this.setAudio(obj.url)
+  }
+  resetSongList(list) {
+    this.songList = list
+    if (list[0]) this.setAudio(list[0].url)
   }
   setAudio(value) {
     this.audio.src = value
