@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { Message } from 'iview'
 class HttpRequest {
   constructor(baseUrl = '') {
     this.baseUrl = baseUrl
@@ -35,6 +36,7 @@ class HttpRequest {
         return data
       },
       error => {
+        Message.error({ duration: 3, content: '获取失败' })
         this.distroy(url)
         return Promise.reject(error)
       }

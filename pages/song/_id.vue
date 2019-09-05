@@ -27,10 +27,11 @@
             <span class="color--blue">{{ songs.al.tns.join(',') }}</span>
           </p>
           <div class="func">
-            <Button type="primary">播放</Button>
+            <Button type="primary" @click="play">播放</Button>
             <Button>收藏</Button>
             <Button>下载</Button>
             <Button>评论</Button>
+            <Button :loading="loading" @click="tryListen">试听</Button>
           </div>
           <div class="anime">
             anime
@@ -186,7 +187,8 @@ import {
   getsongDetail,
   getSongUrl,
   commentMusic,
-  simiPlaylist
+  simiPlaylist,
+  getMusicUrlByOther
 } from '@/api/api'
 import { mapState } from 'vuex'
 // import anime from '@/components/common/anime.vue'
@@ -204,7 +206,8 @@ export default {
   data() {
     return {
       lyric: {},
-      isFlat: true
+      isFlat: true,
+      loading: false
     }
   },
   computed: {
@@ -251,6 +254,18 @@ export default {
     }, 2000)
   },
   methods: {
+    tryListen() {
+      this.loading = true
+      getMusicUrlByOther(this.$route.params.id)
+        .then(res => {
+          this.loading = false
+          this.$music.setAudio(res.data.url)
+        })
+        .catch(e => {
+          this.loading = false
+          this.$Message.error('获取失败')
+        })
+    },
     pageChange(e) {
       commentMusic({ id: this.$route.params.id, offset: e }).then(res => {
         if (res.code === 200) {

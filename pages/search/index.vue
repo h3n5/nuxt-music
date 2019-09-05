@@ -25,12 +25,20 @@
           :count="count"
         ></component>
       </keep-alive>
+      <Page
+        class="page"
+        :page-size="30"
+        :total="count"
+        prev-text="上一页"
+        next-text="下一页"
+        @on-change="pageChnage"
+      />
     </div>
   </div>
 </template>
 
 <script>
-import { searchMusic } from '@/api/api'
+import { searchMusic } from '@/api/api.js'
 export default {
   name: 'Search',
   components: {
@@ -44,6 +52,8 @@ export default {
   },
   data() {
     return {
+      offset: 0,
+      total: 0,
       obj: {},
       list: [],
       count: 0,
@@ -61,6 +71,7 @@ export default {
       selected: this.$route.query.type || 1
     }
   },
+
   computed: {
     listData() {
       return this.obj[this.selected] || []
@@ -91,6 +102,10 @@ export default {
     }
   },
   methods: {
+    pageChnage(v) {
+      this.offset = v - 1
+      this.goSearch()
+    },
     async change(e) {
       if (!this.obj[e]) {
         await this.goSearch(e)
@@ -101,9 +116,10 @@ export default {
       const type = e || this.selected
       const { result } = await searchMusic({
         keywords: this.input,
-        type: type
+        type: type,
+        offset: this.offset
       })
-      const key = this.navList.find(v => v.type === e).data
+      const key = this.navList.find(v => v.type === +type).data
       this.obj[type] = result[key]
       this.count = result[key.slice(0, -1) + 'Count']
     }
@@ -155,6 +171,10 @@ export default {
         border-top: 2px solid #c20c0c;
       }
     }
+  }
+  .page {
+    margin: 20px 0;
+    text-align: center;
   }
 }
 </style>

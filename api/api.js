@@ -2,6 +2,13 @@ import apiMusic from './api.url'
 import HttpRequest from './axios'
 const baseUrl = 'http://localhost:3000' // 'http://34.80.55.4:3000'
 const axios = new HttpRequest(baseUrl)
+export const getMusicUrlByOther = id => {
+  return axios.request({
+    url: 'getByOther', // personal
+    method: 'get',
+    params: { id }
+  })
+}
 export const getBanner = () => {
   return axios.request({
     url: apiMusic.banner,

@@ -8,7 +8,8 @@ import {
   Input,
   Tabs,
   AutoComplete,
-  Option
+  Option,
+  Message
 } from 'iview'
 import 'iview/dist/styles/iview.css'
 Vue.prototype.$IVIEW = {}
@@ -22,3 +23,4 @@ Vue.component('Tabs', Tabs)
 Vue.component('TabPane', Tabs.Pane)
 Vue.component('AutoComplete', AutoComplete)
 Vue.component('Option', Option)
+Vue.prototype.$Message = Message

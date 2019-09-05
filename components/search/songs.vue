@@ -1,7 +1,7 @@
 <template>
   <Table :columns="columns" :data="list" class="nohead">
     <template slot="name" slot-scope="{ row }">
-      <Icon type="ios-play" size="18" />
+      <Icon type="ios-play" size="18" @click="play(row)" />
       <span class="index">{{ row.name }}</span>
       <div class="btn__group">
         <Icon type="md-add" size="18" />
@@ -61,6 +61,9 @@ export default {
         ':' +
         (~~(temp % 60) < 10 ? '0' + ~~(temp % 60) : ~~(temp % 60))
       )
+    },
+    play(row) {
+      this.$router.push({ name: 'song-id', params: { id: row.id } })
     }
   }
 }
